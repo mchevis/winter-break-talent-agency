@@ -14,20 +14,29 @@ h1 {
   padding: 1rem;
 }
 
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 #main {
   padding: 20px;
   display: flex;
   justify-content: space-around;
 }
 
-#client-list {
+#client-list-container {
   flex: 1;
   text-align: center;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 1rem;
+#client-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.client-item {
+  padding: 3px;
 }
 
 ul {

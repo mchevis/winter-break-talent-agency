@@ -7,7 +7,7 @@ const SkillList = ({ skills }) => {
       <ul>
         {skills.map((c) => (
           <li key={c.id} className="skill-item">
-            {c.name}
+            {c.name} ({c.clients.length})
           </li>
         ))}
       </ul>

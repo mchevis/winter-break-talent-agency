@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import ClientList from "./ClientList";
-import SkillList from "./SkillList";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./Home";
+import SingleClient from "./SingleClient";
 
 class App extends React.Component {
   constructor() {
@@ -23,16 +24,29 @@ class App extends React.Component {
     }
   }
   render() {
-    console.log(this.state);
-    const { clients, skills } = this.state;
     return (
-      <div>
-        <h1>ACME Talent Agency</h1>
-        <div id="main">
-          <ClientList clients={clients} />
-          <SkillList skills={skills} />
+      <Router>
+        <div id="page">
+          <h1>ACME Talent Agency</h1>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(routeProps) => (
+                <Home
+                  {...routeProps}
+                  clients={this.state.clients}
+                  skills={this.state.skills}
+                />
+              )}
+            ></Route>
+            <Route
+              path="/clients/:id"
+              render={(routeProps) => <SingleClient {...routeProps} />}
+            ></Route>
+          </Switch>
         </div>
-      </div>
+      </Router>
     );
   }
 }
