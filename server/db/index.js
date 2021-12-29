@@ -6,13 +6,13 @@ const Skill = require("./skill");
 // model relationships
 Client.belongsToMany(Skill, {
   through: "clientSkills",
-  as: "clients",
-  foreignKey: "clientId",
+  as: "skills",
+  foreignKey: "skillId",
 });
 Skill.belongsToMany(Client, {
   through: "clientSkills",
-  as: "skills",
-  foreignKey: "skillId",
+  as: "clients",
+  foreignKey: "clientId",
 });
 
 //seeding

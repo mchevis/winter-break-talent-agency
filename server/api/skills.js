@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Skill } = require("../db").models;
+const { Skill, Client } = require("../db").models;
 
 // GET /api/skills
 router.get("/", async (req, res, next) => {

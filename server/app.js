@@ -14,7 +14,7 @@ app.get("/", (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "client", "index.html"));
 });
 
-// app.use("/api", require("./api"));
+app.use("/api", require("./api"));
 
 app.use((req, res, next) => {
   const error = Error("page not found");
