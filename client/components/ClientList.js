@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const ClientList = ({ clients }) => {
   return (
-    <div id="client-list-container">
+    <div class="list-container">
       <h2> Clients </h2>
-      <div id="client-list">
+      <div className="list">
         {clients.map((c) => (
-          <Link to={`/clients/${c.id}`} key={c.id} className="client-item">
+          <Link to={`/clients/${c.id}`} key={c.id} className="item">
             {c.name} ({c.skills.length})
           </Link>
         ))}

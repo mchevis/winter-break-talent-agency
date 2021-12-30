@@ -9,4 +9,17 @@ const Skill = conn.define("skill", {
   },
 });
 
+Skill.prototype.updateName = function (newName) {
+  try {
+    return this.update(
+      {
+        name: newName,
+      },
+      { where: { id: this.id } }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = Skill;

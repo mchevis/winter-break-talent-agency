@@ -29,4 +29,15 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+// PUT /api/skills/:id
+router.put("/:id", async (req, res, next) => {
+  try {
+    const skill = await Skill.findByPk(req.params.id);
+    await skill.updateName(req.body.newName);
+    res.sendStatus(204); //dont know the right status
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

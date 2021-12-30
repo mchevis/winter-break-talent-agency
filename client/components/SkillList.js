@@ -1,16 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SkillList = ({ skills }) => {
   return (
-    <div id="skill-list">
+    <div class="list-container">
       <h2> Skills </h2>
-      <ul>
+      <div className="list">
         {skills.map((c) => (
-          <li key={c.id} className="skill-item">
+          <Link to={`/skills/${c.id}`} key={c.id} className="item">
             {c.name} ({c.clients.length})
-          </li>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

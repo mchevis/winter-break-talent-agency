@@ -9,43 +9,99 @@ body {
   margin: 10px;
 }
 
+#page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 h1 {
   text-align: center;
   padding: 1rem;
+  color: white;
+  width: 100vw;
+  height: 4.5rem;
+  background-color: #ff00ff95;
+}
+
+/* homepage */
+#main {
+  padding: 20px;
+  width: 75%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.list-container {
+  flex: 1;
+  text-align: center;
+  margin: 10px;
+  max-width: 300px;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 1rem;
+  border: 1px solid darkgray;
+  height: 3rem;
+  padding: 10px;
+  background-color: lightgray;
 }
 
-#main {
-  padding: 20px;
-  display: flex;
-  justify-content: space-around;
-}
-
-#client-list-container {
-  flex: 1;
-  text-align: center;
-}
-
-#client-list {
+.list {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: calc(100% - (3rem - 20px));
+  padding: 10px;
+  border: 1px solid darkgray;
+  border-top: white;
 }
 
-.client-item {
-  padding: 3px;
+.item {
+  padding: 0.5rem;
+  text-decoration: none;
+  color: black;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
+/* skills/:id */
+
+#skill-form {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  align-items: center;
 }
 
-#skill-list {
-  flex: 1;
+input {
+  margin: 20px;
+  padding: 5px;
+  width: 100%;
   text-align: center;
+}
+
+#skill-form-buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.form-button {
+  padding: 5px 0px;
+  width: calc(20vw - 5px);
+  background-color: dodgerblue;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid white;
+  /* box-shadow: 5px 5px 5px lightgray; */
+}
+
+#cancel-button {
+  background-color: lightgray;
+}
+
+#cancel-button a {
+  text-decoration: none;
+  color: black;
 }

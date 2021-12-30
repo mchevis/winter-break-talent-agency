@@ -3,6 +3,7 @@ import axios from "axios";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import SingleClient from "./SingleClient";
+import SingleSkill from "./SingleSkill";
 
 class App extends React.Component {
   constructor() {
@@ -43,6 +44,10 @@ class App extends React.Component {
             <Route
               path="/clients/:id"
               render={(routeProps) => <SingleClient {...routeProps} />}
+            ></Route>
+            <Route
+              path="/skills/:id"
+              render={(routeProps) => <SingleSkill {...routeProps} />}
             ></Route>
           </Switch>
         </div>

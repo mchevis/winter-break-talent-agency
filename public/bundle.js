@@ -2160,11 +2160,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./client/components/Home.js");
 /* harmony import */ var _SingleClient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleClient */ "./client/components/SingleClient.js");
+/* harmony import */ var _SingleSkill__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SingleSkill */ "./client/components/SingleSkill.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 
@@ -2198,18 +2200,21 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       id: "page"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "ACME Talent Agency"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "ACME Talent Agency"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
       exact: true,
       path: "/",
       render: routeProps => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Home__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, routeProps, {
         clients: this.state.clients,
         skills: this.state.skills
       }))
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
       path: "/clients/:id",
       render: routeProps => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SingleClient__WEBPACK_IMPORTED_MODULE_3__["default"], routeProps)
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+      path: "/skills/:id",
+      render: routeProps => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SingleSkill__WEBPACK_IMPORTED_MODULE_4__["default"], routeProps)
     }))));
   }
 
@@ -2239,13 +2244,13 @@ const ClientList = ({
   clients
 }) => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    id: "client-list-container"
+    class: "list-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, " Clients "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    id: "client-list"
+    className: "list"
   }, clients.map(c => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: `/clients/${c.id}`,
     key: c.id,
-    className: "client-item"
+    className: "item"
   }, c.name, " (", c.skills.length, ")"))));
 };
 
@@ -2334,6 +2339,87 @@ class SingleClient extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 /***/ }),
 
+/***/ "./client/components/SingleSkill.js":
+/*!******************************************!*\
+  !*** ./client/components/SingleSkill.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+class SingleSkill extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  async componentDidMount() {
+    const {
+      data: skill
+    } = await axios__WEBPACK_IMPORTED_MODULE_1___default().get(`/api/skills/${this.props.match.params.id}`);
+    this.setState({
+      id: skill.id,
+      name: skill.name
+    });
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault();
+    await axios__WEBPACK_IMPORTED_MODULE_1___default().put(`/api/skills/${this.props.match.params.id}`, {
+      newName: this.state.name
+    });
+    this.props.history.push("/");
+  }
+
+  render() {
+    console.log(this.state);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      id: "skill-form",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      name: "name",
+      value: this.state.name,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      id: "skill-form-buttons"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      type: "submit",
+      className: "form-button"
+    }, "Update"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      className: "form-button",
+      id: "cancel-button"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: "/"
+    }, "Cancel"))));
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SingleSkill);
+
+/***/ }),
+
 /***/ "./client/components/SkillList.js":
 /*!****************************************!*\
   !*** ./client/components/SkillList.js ***!
@@ -2346,16 +2432,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 const SkillList = ({
   skills
 }) => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    id: "skill-list"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, " Skills "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, skills.map(c => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    class: "list-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, " Skills "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "list"
+  }, skills.map(c => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: `/skills/${c.id}`,
     key: c.id,
-    className: "skill-item"
+    className: "item"
   }, c.name, " (", c.clients.length, ")"))));
 };
 
