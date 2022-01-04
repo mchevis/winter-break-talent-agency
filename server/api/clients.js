@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Client, Skill } = require("../db").models;
+const { Client, Skill, ClientSkills } = require("../db").models;
 
 // GET /api/clients
 router.get("/", async (req, res, next) => {
@@ -21,7 +21,7 @@ router.get("/:id", async (req, res, next) => {
     res.send(
       await Client.findOne({
         where: { id: req.params.id },
-        include: [{ model: Skill, as: "skills" }],
+        include: [{ model: ClientSkills, include: [Skill] }],
       })
     );
   } catch (error) {

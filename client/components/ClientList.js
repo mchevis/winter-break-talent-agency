@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ClientList = ({ clients }) => {
   return (
-    <div class="list-container">
+    <div className="list-container">
       <h2> Clients </h2>
       <div className="list">
         {clients.map((c) => (

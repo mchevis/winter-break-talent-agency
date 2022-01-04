@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SkillList = ({ skills }) => {
   return (
-    <div class="list-container">
+    <div className="list-container">
       <h2> Skills </h2>
       <div className="list">
         {skills.map((c) => (

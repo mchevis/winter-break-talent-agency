@@ -2211,7 +2211,9 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }))
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
       path: "/clients/:id",
-      render: routeProps => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SingleClient__WEBPACK_IMPORTED_MODULE_3__["default"], routeProps)
+      render: routeProps => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SingleClient__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, routeProps, {
+        skills: this.state.skills
+      }))
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
       path: "/skills/:id",
       render: routeProps => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SingleSkill__WEBPACK_IMPORTED_MODULE_4__["default"], routeProps)
@@ -2244,7 +2246,7 @@ const ClientList = ({
   clients
 }) => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    class: "list-container"
+    className: "list-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, " Clients "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "list"
   }, clients.map(c => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
@@ -2307,6 +2309,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
@@ -2314,8 +2318,11 @@ class SingleClient extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor(props) {
     super(props);
     this.state = {
-      client: {}
+      client: {
+        clientSkills: []
+      }
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -2327,10 +2334,46 @@ class SingleClient extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
   }
 
+  async handleSubmit(e) {
+    console.log(e.target.children[0].value);
+    e.preventDefault();
+    await axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/clientSkills/", {
+      skillId: e.target.children[0].value,
+      clientId: this.state.client.id
+    });
+  }
+
   render() {
+    const {
+      client
+    } = this.state;
+    const {
+      skills
+    } = this.props;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       id: "single-client-page"
-    }, JSON.stringify(this.state.client));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+      id: "client-name"
+    }, client.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      id: "client-info"
+    }, client.name, "\xA0", client.clientSkills.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "has the following skills:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, client.clientSkills.map(s => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      key: s.skillId
+    }, s.skill.name)))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "has no logged skills.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+      name: "selectSkill"
+    }, skills.filter(s => !client.clientSkills.includes(s.id)).map(s => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: s.id,
+      key: s.id
+    }, s.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      type: "submit",
+      className: "form-button"
+    }, "Add Skill")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      className: "form-button",
+      id: "cancel-button"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: "/"
+    }, "Cancel")));
   }
 
 }
@@ -2440,7 +2483,7 @@ const SkillList = ({
   skills
 }) => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    class: "list-container"
+    className: "list-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, " Skills "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "list"
   }, skills.map(c => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {

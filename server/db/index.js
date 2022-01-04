@@ -2,18 +2,21 @@ const faker = require("faker");
 const conn = require("./conn");
 const Client = require("./client");
 const Skill = require("./skill");
+const ClientSkills = require("./clientSkills");
 
 // model relationships
 Client.belongsToMany(Skill, {
   through: "clientSkills",
-  as: "skills",
-  foreignKey: "skillId",
 });
 Skill.belongsToMany(Client, {
   through: "clientSkills",
-  as: "clients",
-  foreignKey: "clientId",
 });
+
+Client.hasMany(ClientSkills);
+ClientSkills.belongsTo(Client);
+
+Skill.hasMany(ClientSkills);
+ClientSkills.belongsTo(Skill);
 
 //seeding
 const syncAndSeed = async () => {
@@ -44,5 +47,6 @@ module.exports = {
   models: {
     Client,
     Skill,
+    ClientSkills,
   },
 };

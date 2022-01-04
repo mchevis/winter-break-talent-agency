@@ -43,7 +43,9 @@ class App extends React.Component {
             ></Route>
             <Route
               path="/clients/:id"
-              render={(routeProps) => <SingleClient {...routeProps} />}
+              render={(routeProps) => (
+                <SingleClient {...routeProps} skills={this.state.skills} />
+              )}
             ></Route>
             <Route
               path="/skills/:id"
