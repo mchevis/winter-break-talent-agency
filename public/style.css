@@ -105,3 +105,22 @@ input {
   text-decoration: none;
   color: black;
 }
+
+/* client/:id */
+#single-client-page {
+  display: flex;
+  flex-direction: column;
+}
+
+#single-client-page > * {
+  margin: 5px;
+}
+
+#single-client-page form {
+  display: flex;
+  flex-direction: column;
+}
+
+#single-client-page select {
+  margin: 5px;
+}

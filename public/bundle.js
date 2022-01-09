@@ -2177,6 +2177,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
     this.props.fetchSkills();
     this.props.fetchClients();
+    this.props.fetchClientSkills();
   }
 
   render() {
@@ -2200,7 +2201,8 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchSkills: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchSkills)()),
-    fetchClients: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchClients)())
+    fetchClients: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchClients)()),
+    fetchClientSkills: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchClientSkills)())
   };
 };
 
@@ -2274,26 +2276,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class Home extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  componentDidMount() {
-    this.props.fetchClientSkills();
-  }
-
-  render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      id: "main"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ClientList__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SkillList__WEBPACK_IMPORTED_MODULE_2__["default"], null));
-  }
-
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchClientSkills: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.fetchClientSkills)())
-  };
+const Home = () => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "main"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ClientList__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SkillList__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_3__.connect)(null, mapDispatchToProps)(Home));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
 
 /***/ }),
 
@@ -2352,8 +2341,13 @@ class SingleClient extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, "X"), " "))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "has no logged skills.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
       onSubmit: this.handleSubmit
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-      name: "selectSkill"
-    }, this.props.skills.filter(s => !clientSkills.map(cs => cs.skillId).includes(s.id)).map(s => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      name: "selectSkill",
+      defaultValue: "DEFAULT"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: "DEFAULT",
+      disabled: true,
+      hidden: true
+    }, "Select a skill"), this.props.skills.filter(s => !clientSkills.map(cs => cs.skillId).includes(s.id)).map(s => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
       value: s.id,
       key: s.id
     }, s.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {

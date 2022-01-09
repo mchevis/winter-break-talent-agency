@@ -56,7 +56,10 @@ class SingleClient extends React.Component {
           )}
         </div>
         <form onSubmit={this.handleSubmit}>
-          <select name="selectSkill">
+          <select name="selectSkill" defaultValue={"DEFAULT"}>
+            <option value="DEFAULT" disabled hidden>
+              Select a skill
+            </option>
             {this.props.skills
               .filter(
                 (s) => !clientSkills.map((cs) => cs.skillId).includes(s.id)
