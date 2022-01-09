@@ -2427,7 +2427,8 @@ class SingleSkill extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: "",
+      buttonDisabled: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -2444,7 +2445,8 @@ class SingleSkill extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      buttonDisabled: false
     });
   }
 
@@ -2465,7 +2467,8 @@ class SingleSkill extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       id: "skill-form-buttons"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "submit",
-      className: "form-button"
+      className: "form-button",
+      disabled: this.state.buttonDisabled
     }, "Update"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "cancel",
       className: "form-button",

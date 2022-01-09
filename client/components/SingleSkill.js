@@ -8,6 +8,7 @@ class SingleSkill extends React.Component {
     super(props);
     this.state = {
       name: "",
+      buttonDisabled: true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +24,7 @@ class SingleSkill extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value, buttonDisabled: false });
   }
 
   handleSubmit(e) {
@@ -40,7 +41,11 @@ class SingleSkill extends React.Component {
           onChange={this.handleChange}
         />
         <div id="skill-form-buttons">
-          <button type="submit" className="form-button">
+          <button
+            type="submit"
+            className="form-button"
+            disabled={this.state.buttonDisabled}
+          >
             Update
           </button>
           <button
