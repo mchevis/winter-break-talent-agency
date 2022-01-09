@@ -9,9 +9,9 @@ const Skill = conn.define("skill", {
   },
 });
 
-Skill.prototype.updateName = function (newName) {
+Skill.prototype.updateName = async function (newName) {
   try {
-    return this.update(
+    await this.update(
       {
         name: newName,
       },

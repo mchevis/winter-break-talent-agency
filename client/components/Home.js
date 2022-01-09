@@ -1,14 +1,28 @@
 import React from "react";
 import ClientList from "./ClientList";
 import SkillList from "./SkillList";
+import { connect } from "react-redux";
+import { fetchClientSkills } from "../store";
 
-const Home = ({ clients, skills }) => {
-  return (
-    <div id="main">
-      <ClientList clients={clients} />
-      <SkillList skills={skills} />
-    </div>
-  );
+class Home extends React.Component {
+  componentDidMount() {
+    this.props.fetchClientSkills();
+  }
+
+  render() {
+    return (
+      <div id="main">
+        <ClientList />
+        <SkillList />
+      </div>
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchClientSkills: () => dispatch(fetchClientSkills()),
+  };
 };
 
-export default Home;
+export default connect(null, mapDispatchToProps)(Home);

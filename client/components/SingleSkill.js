@@ -1,6 +1,7 @@
 import React from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { updateSkill } from "../store";
 
 class SingleSkill extends React.Component {
   constructor(props) {
@@ -12,28 +13,25 @@ class SingleSkill extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentDidMount() {
-    const { data: skill } = await axios.get(
-      `/api/skills/${this.props.match.params.id}`
-    );
-    this.setState({ id: skill.id, name: skill.name });
+  componentDidMount() {
+    const selectedSkill = this.props.skills.filter(
+      (s) => s.id === this.props.match.params.id * 1
+    )[0];
+    selectedSkill
+      ? this.setState({ name: selectedSkill.name })
+      : this.setState({ name: "" });
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  async handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
-    await axios.put(`/api/skills/${this.props.match.params.id}`, {
-      newName: this.state.name,
-    });
-    this.props.history.push("/");
+    this.props.updateSkill(this.props.match.params.id, this.state.name);
   }
 
   render() {
-    console.log(this.state);
-
     return (
       <form id="skill-form" onSubmit={this.handleSubmit}>
         <input
@@ -45,7 +43,12 @@ class SingleSkill extends React.Component {
           <button type="submit" className="form-button">
             Update
           </button>
-          <button className="form-button" id="cancel-button">
+          <button
+            type="cancel"
+            className="form-button"
+            id="cancel-button"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <Link to="/">Cancel</Link>
           </button>
         </div>
@@ -54,4 +57,17 @@ class SingleSkill extends React.Component {
   }
 }
 
-export default SingleSkill;
+const mapStateToProps = (state) => {
+  return {
+    skills: state.skills,
+  };
+};
+
+const mapDispatchToProps = (dispatch, { history }) => {
+  return {
+    updateSkill: (skillId, newName) =>
+      dispatch(updateSkill(skillId, newName, history)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleSkill);

@@ -32,6 +32,8 @@ const syncAndSeed = async () => {
   const skills = ["Dancing", "Singing", "Drawing", "Coding"];
   await Promise.all(skills.map((sk) => Skill.create({ name: sk })));
 
+  await ClientSkills.create({ clientId: 2, skillId: 1 });
+
   console.log(`
 
 

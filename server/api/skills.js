@@ -32,9 +32,12 @@ router.get("/:id", async (req, res, next) => {
 // PUT /api/skills/:id
 router.put("/:id", async (req, res, next) => {
   try {
-    const skill = await Skill.findByPk(req.params.id);
+    const skill = await Skill.findOne({
+      where: { id: req.params.id },
+      include: [{ model: Client, as: "clients" }],
+    });
     await skill.updateName(req.body.newName);
-    res.sendStatus(204); //dont know the right status
+    res.send(skill);
   } catch (error) {
     next(error);
   }
