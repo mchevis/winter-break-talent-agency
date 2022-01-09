@@ -6,17 +6,29 @@ import { addClientSkill, deleteClientSkill } from "../store";
 class SingleClient extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedSkillId: "DEFAULT",
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
-  async handleSubmit(e) {
+  handleSelect(e) {
+    this.setState({ selectedSkillId: e.target.value });
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
     const clientId = this.props.clients.filter(
       (c) => c.id === this.props.match.params.id * 1
     )[0].id;
-    const skillId = e.target.children[0].value * 1;
-    this.props.addClientSkill(clientId, skillId);
+    const skillId = this.state.selectedSkillId;
+    if (clientId && skillId !== "DEFAULT") {
+      this.props.addClientSkill(clientId, skillId);
+    }
+    this.setState({ selectedSkillId: "DEFAULT" });
+    document.getElementById("addNewSkillForm").reset();
   }
 
   handleDelete(clientId, skillId) {
@@ -55,9 +67,13 @@ class SingleClient extends React.Component {
             <span>has no logged skills.</span>
           )}
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <select name="selectSkill" defaultValue={"DEFAULT"}>
-            <option value="DEFAULT" disabled hidden>
+        <form id="addNewSkillForm" onSubmit={this.handleSubmit}>
+          <select
+            name="selectSkill"
+            defaultValue={"DEFAULT"}
+            onChange={this.handleSelect}
+          >
+            <option value="DEFAULT" disabled>
               Select a skill
             </option>
             {this.props.skills
@@ -70,7 +86,11 @@ class SingleClient extends React.Component {
                 </option>
               ))}
           </select>
-          <button type="submit" className="form-button">
+          <button
+            type="submit"
+            className="form-button"
+            disabled={this.state.selectedSkillId === "DEFAULT"}
+          >
             Add Skill
           </button>
         </form>

@@ -2309,15 +2309,33 @@ __webpack_require__.r(__webpack_exports__);
 class SingleClient extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedSkillId: "DEFAULT"
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
-  async handleSubmit(e) {
+  handleSelect(e) {
+    this.setState({
+      selectedSkillId: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
     const clientId = this.props.clients.filter(c => c.id === this.props.match.params.id * 1)[0].id;
-    const skillId = e.target.children[0].value * 1;
-    this.props.addClientSkill(clientId, skillId);
+    const skillId = this.state.selectedSkillId;
+
+    if (clientId && skillId !== "DEFAULT") {
+      this.props.addClientSkill(clientId, skillId);
+    }
+
+    this.setState({
+      selectedSkillId: "DEFAULT"
+    });
+    document.getElementById("addNewSkillForm").reset();
   }
 
   handleDelete(clientId, skillId) {
@@ -2339,20 +2357,22 @@ class SingleClient extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, s.skill.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: () => this.handleDelete(client.id, s.skillId)
     }, "X"), " "))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "has no logged skills.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      id: "addNewSkillForm",
       onSubmit: this.handleSubmit
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
       name: "selectSkill",
-      defaultValue: "DEFAULT"
+      defaultValue: "DEFAULT",
+      onChange: this.handleSelect
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
       value: "DEFAULT",
-      disabled: true,
-      hidden: true
+      disabled: true
     }, "Select a skill"), this.props.skills.filter(s => !clientSkills.map(cs => cs.skillId).includes(s.id)).map(s => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
       value: s.id,
       key: s.id
     }, s.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "submit",
-      className: "form-button"
+      className: "form-button",
+      disabled: this.state.selectedSkillId === "DEFAULT"
     }, "Add Skill")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "cancel",
       className: "form-button",

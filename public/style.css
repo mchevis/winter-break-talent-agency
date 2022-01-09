@@ -97,6 +97,11 @@ input {
   /* box-shadow: 5px 5px 5px lightgray; */
 }
 
+.form-button:disabled {
+  background-color: lightgray;
+  cursor: auto;
+}
+
 #cancel-button {
   background-color: lightgray;
 }
